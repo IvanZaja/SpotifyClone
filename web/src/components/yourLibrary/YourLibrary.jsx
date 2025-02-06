@@ -1,15 +1,37 @@
+import { useState } from "react"
+import ArtistsList from "./artistsList/ArtistsList"
+import ListsList from "./listsList/ListsList"
+import AlbumsList from "./albumsList/AlbumsList"
 
-function YourLibrary({artists}) {
+function YourLibrary({ artists, lists, albums }) {
+
+  const [selected, setSelected] = useState('Listas')
+
   return (
-    <div className="p-2">
-      <h1 className="text-2xl">Your Library</h1>
+    <div className="p-2 flex flex-col gap-2">
+      <div className="flex justify-between items-center">
+        <h1 className="text-2xl">Tu biblioteca</h1>
+        <div>
+          <a>+</a>
+          <a>➡️</a>
+        </div>
+      </div>
+      <div className="flex gap-2">
+        <a className={`px-[12px] py-[4px] text-[14px] bg-[#ffffff1a] rounded-full ${selected === 'Listas' ? 'bg-[#ffffff3a]' : ''}`}
+          onClick={() => setSelected('Listas')}>Listas</a>
+        <a className={`px-[12px] py-[4px] text-[14px] bg-[#ffffff1a] rounded-full ${selected === 'Artistas' ? 'bg-[#ffffff3a]' : ''}`} 
+          onClick={() => setSelected('Artistas')}>Artistas</a>
+        <a className={`px-[12px] py-[4px] text-[14px] bg-[#ffffff1a] rounded-full ${selected === 'Albumes' ? 'bg-[#ffffff3a]' : ''}`}
+          onClick={() => setSelected('Albumes')}>Albumes</a>
+      </div>
+      <div className="flex justify-between">
+        <a>🔍</a> 
+        <a>Recientes</a>
+      </div>
       <div>
-        {artists.map((artist) => (
-          <a href={`/artist/${artist.id}`} key={artist.id} className="flex items-center space-x-2 py-2">
-            <img src={artist.images[2].url} alt={artist.name} className="w-8 h-8 rounded-full" />
-            <h1 className="text-sm">{artist.name}</h1>
-          </a>
-        ))}
+        {selected === 'Listas' && <ListsList lists={lists}/>}  
+        {selected === 'Artistas' && <ArtistsList artists={artists} />}
+        {selected === 'Albumes' && <AlbumsList albums={albums}/>}
       </div>
     </div>
   )

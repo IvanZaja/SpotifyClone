@@ -8,11 +8,17 @@ import PlayBar from './components/playBar/PlayBar';
 
 function App() {
   const [artists, setArtists] = useState([]);
+  const [lists, setLists] = useState([]);
+  const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
     async function fetch() {
       try {
+        const  listInfo  = await SpotifyApi.getLists()
         const  artistInfo  = await SpotifyApi.getArtists()
+        
+        console.log(listInfo.data.lists);
+        setLists( listInfo.data.lists );
         setArtists( artistInfo.data.artists );
       } catch (error) {
         console.error(error);
@@ -24,7 +30,9 @@ function App() {
     <>
       <div className="grid grid-cols-[250px_1fr_250px] grid-rows-[45px_1fr_60px] gap-y-[10px] gap-x-[10px] h-screen p-1.5">
         <div className="col-span-3 text-[#b3b3b3]"><SearchBar/></div>
-        <div className='bg-[#121212] text-[#b3b3b3] rounded-md'><YourLibrary artists={artists} /></div>
+        <div className='bg-[#121212] text-[#b3b3b3] rounded-md'>
+          <YourLibrary artists={artists} lists={lists} albums={albums}/>
+        </div>
         <div className="bg-[#121212] col-span-2 text-[#b3b3b3] rounded-md"><MainView/></div>
         <div className='col-span-3 text-[#b3b3b3]'><PlayBar/></div>
       </div>

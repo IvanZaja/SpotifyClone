@@ -16,10 +16,18 @@ http.interceptors.response.use(
 );
 
 export function getArtist(id) {
-    console.log(id);
     return http.get(`/artist/${id}`, id);
 }
 
 export function getArtists(id) {
     return http.get(`/artists/${id}`);
+}
+
+export function getList(id) {
+    return http.get(`/list/${id}`, id);
+}
+
+export function getLists(id) {
+    console.log(id);
+    return http.get(`/lists/${id}`);
 }
