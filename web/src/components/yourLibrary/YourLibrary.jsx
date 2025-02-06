@@ -3,9 +3,9 @@ import ArtistsList from "./artistsList/ArtistsList"
 import ListsList from "./listsList/ListsList"
 import AlbumsList from "./albumsList/AlbumsList"
 
-function YourLibrary({ artists, lists, albums }) {
+function YourLibrary({ artists, albums }) {
 
-  const [selected, setSelected] = useState('Listas')
+  const [selected, setSelected] = useState('Artistas')
 
   return (
     <div className="p-2 flex flex-col gap-2">
@@ -17,8 +17,6 @@ function YourLibrary({ artists, lists, albums }) {
         </div>
       </div>
       <div className="flex gap-2">
-        <a className={`px-[12px] py-[4px] text-[14px] bg-[#ffffff1a] rounded-full ${selected === 'Listas' ? 'bg-[#ffffff3a]' : ''}`}
-          onClick={() => setSelected('Listas')}>Listas</a>
         <a className={`px-[12px] py-[4px] text-[14px] bg-[#ffffff1a] rounded-full ${selected === 'Artistas' ? 'bg-[#ffffff3a]' : ''}`} 
           onClick={() => setSelected('Artistas')}>Artistas</a>
         <a className={`px-[12px] py-[4px] text-[14px] bg-[#ffffff1a] rounded-full ${selected === 'Albumes' ? 'bg-[#ffffff3a]' : ''}`}
@@ -29,7 +27,6 @@ function YourLibrary({ artists, lists, albums }) {
         <a>Recientes</a>
       </div>
       <div>
-        {selected === 'Listas' && <ListsList lists={lists}/>}  
         {selected === 'Artistas' && <ArtistsList artists={artists} />}
         {selected === 'Albumes' && <AlbumsList albums={albums}/>}
       </div>

@@ -23,11 +23,17 @@ export function getArtists(id) {
     return http.get(`/artists/${id}`);
 }
 
-export function getList(id) {
-    return http.get(`/list/${id}`, id);
+export function getArtistTopTracks(id) {
+    return http.get(`/artist/${id}/top-tracks`);
 }
 
-export function getLists(id) {
-    console.log(id);
-    return http.get(`/lists/${id}`);
+export function getAlbum(id) {
+    console.log('ALBUM',id);
+
+    return http.get(`/album/${id}`, id);
+}
+
+export function getAlbums(id) {
+    console.log('todo',id);
+    return http.get(`/albums/${id}`);
 }

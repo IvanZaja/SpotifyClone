@@ -14,11 +14,11 @@ function App() {
   useEffect(() => {
     async function fetch() {
       try {
-        const  listInfo  = await SpotifyApi.getLists()
+        const  albumInfo  = await SpotifyApi.getAlbums()
         const  artistInfo  = await SpotifyApi.getArtists()
         
-        console.log(listInfo.data.lists);
-        setLists( listInfo.data.lists );
+        console.log('LISiNFO', albumInfo.data.albums);
+        setAlbums( albumInfo.data.albums );
         setArtists( artistInfo.data.artists );
       } catch (error) {
         console.error(error);
